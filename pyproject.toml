@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "tipotwittermastahlongedemais"
+version = "0.1.0"
+description = ""
+authors = ["Maicon Veiga"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+Django = "^5.0.6"
+black = "^24.4.2"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.2"
+factory-boy = "^3.3.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
