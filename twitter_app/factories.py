@@ -4,7 +4,7 @@ from faker import Factory as FakerFactory
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 
-from twitter_app.models import Tweet, Comments, Profile
+from twitter_app.models import Tweet,Profile
 
 faker = FakerFactory.create()
 
@@ -33,15 +33,6 @@ class TweetFactory(factory.django.DjangoModelFactory):
 
     class Meta:
         model = Tweet
-
-class CommentFactory(factory.django.DjangoModelFactory):
-    tweetTarget = factory.SubFactory(TweetFactory)
-    content = factory.LazyAttribute(lambda x: faker.sentence())
-    user = factory.SubFactory(UserFactory)
-    created_at = factory.LazyAttribute(lambda x: now())
-
-    class Meta:
-        model = Comments
 
 class ProfileFactory(factory.django.DjangoModelFactory):
     bio = factory.LazyAttribute(lambda x: faker.sentence())
