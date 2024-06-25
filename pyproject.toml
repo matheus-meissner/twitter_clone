@@ -13,6 +13,8 @@ black = "^24.4.2"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.2"
 factory-boy = "^3.3.0"
+pytest-django = "^4.8.0"
+faker = "^25.9.1"
 
 [build-system]
 requires = ["poetry-core"]
