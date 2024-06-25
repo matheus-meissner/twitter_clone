@@ -22,4 +22,4 @@ class Comments(models.Model):
         return f'Comment by {self.user.username}: {self.content[:20]}...'
 
     class Meta:
-        ordering = ['-created_at']
+        ordering = ['created_at']
