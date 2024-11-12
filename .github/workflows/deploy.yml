@@ -1,0 +1,45 @@
+name: Deploy Django to Railway
+
+on:
+  push:
+    branches:
+      - main  # Altere para a branch que deseja monitorar
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12.1'  # Altere para a versão que seu projeto utiliza
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Django migrations
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}  # Defina esta variável no seu GitHub
+        run: |
+          python manage.py migrate
+
+      - name: Collect static files
+        env:
+          DEBUG: 'False'
+        run: |
+          python manage.py collectstatic --noinput
+
+      - name: Deploy to Railway
+        uses: RailwayAPI/railway-deploy@v0.2.0
+        with:
+          project_id: ${{ secrets.RAILWAY_PROJECT_ID }}
+          environment: production
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
