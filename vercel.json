@@ -1,6 +1,11 @@
 {
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/social/wsgi.py" }
-    ]
-  }
-  
+  "builds": [
+    {
+      "src": "social/wsgi.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "social/wsgi.py" }
+  ]
+}
